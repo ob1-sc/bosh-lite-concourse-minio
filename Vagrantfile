@@ -6,18 +6,38 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  # bosh-lite VM
+  config.vm.define "bosh-lite" do |bl|
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+    bl.vm.box = 'cloudfoundry/bosh-lite'
+    bl.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=777"] # ensure any VM user can create files in subfolders - eg, /vagrant/tmp
+    bl.vm.provider :virtualbox do |v, override|
+      v.memory = 12288
+      v.cpus = 4
+      override.vm.box_version = '9000.137.0' # ci:replace
+      # To use a different IP address for the bosh-lite director, uncomment this line:
+      # override.vm.network :private_network, ip: '192.168.59.4', id: :local
+    end
+
+  end
+
+  # ubuntu client VM
+  config.vm.define "cli-vm" do |clivm|
+
+    clivm.vm.box = "ubuntu/xenial64"
+    clivm.vm.provider :virtualbox do |v, override|
+      v.memory = 4096
+      v.cpus = 1
+    end
+
+    clivm.vm.provision "shell", privileged: true, path: "bosh-cli-install.sh"
+
+  end
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
