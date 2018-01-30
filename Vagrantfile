@@ -36,6 +36,7 @@ Vagrant.configure("2") do |config|
     end
 
     clivm.vm.provision "shell", privileged: true, path: "bosh-cli-install.sh"
+    clivm.vm.provision "shell", privileged: false, path: "bosh-lite-settings.sh"
 
   end
 
