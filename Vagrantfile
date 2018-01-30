@@ -38,7 +38,8 @@ Vagrant.configure("2") do |config|
     clivm.vm.provision "shell", privileged: true, path: "bosh-cli-install.sh"
     clivm.vm.provision "shell", privileged: false, path: "bosh-lite-settings.sh"
     clivm.vm.provision "shell", privileged: false, path: "concourse-install.sh"
-
+    clivm.vm.provision "shell", privileged: true, path: "fly-install.sh"
+    
   end
 
   # Create a forwarded port mapping which allows access to a specific port
