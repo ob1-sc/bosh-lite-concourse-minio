@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
 CONCOURSE_IP=10.244.15.2
+BOSH_CLI_NAME=bosh
 
 # clone the concourse-deployment repository
+rm -rf concourse-deployment
 git clone https://github.com/concourse/concourse-deployment.git
 
 pushd concourse-deployment/cluster
 
 # get the required stemcell version
-STEMCELL_VERSION=$(bosh int concourse.yml --path /stemcells/alias=trusty/version)
+STEMCELL_VERSION=$($BOSH_CLI_NAME int concourse.yml --path /stemcells/alias=trusty/version)
 STEMCELL_URL=https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent
 
 # if the stemcell isn't latest then append version number to the URL
@@ -17,13 +19,13 @@ if [[ $STEMCELL_VERSION != "latest" ]]; then
 fi
 
 # upload the stemcell
-bosh upload-stemcell $STEMCELL_URL
+$BOSH_CLI_NAME upload-stemcell $STEMCELL_URL -n
 
 # update the cloud config for vbox
-bosh -e $BOSH_ENVIRONMENT update-cloud-config cloud_configs/vbox.yml
+$BOSH_CLI_NAME update-cloud-config cloud_configs/vbox.yml -n
 
 # deploy concourse
-bosh -e $BOSH_ENVIRONMENT deploy -d concourse concourse.yml \
+$BOSH_CLI_NAME deploy -d concourse concourse.yml -n \
   -l ../versions.yml \
   --vars-store cluster-creds.yml \
   -o operations/static-web.yml \
