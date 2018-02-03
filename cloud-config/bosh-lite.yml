@@ -13,15 +13,15 @@ networks:
   - az: z1
     gateway: 10.244.16.1
     range: 10.244.16.0/24
+    static:
+    - 10.244.16.4
 
 vm_types:
-- name: concourse
-  network: bosh-lite
-- name: minio
+- name: default
   network: bosh-lite
 
 disk_types:
-- name: small
+- name: default
   disk_size: 10240
 
 compilation:

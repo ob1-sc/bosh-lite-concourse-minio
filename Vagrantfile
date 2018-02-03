@@ -38,6 +38,7 @@ Vagrant.configure("2") do |config|
     clivm.vm.provision "shell", privileged: true, path: "misc/yaml-patch-install.sh"
     clivm.vm.provision "shell", privileged: true, path: "bosh/bosh-cli-install.sh"
     clivm.vm.provision "shell", privileged: false, path: "bosh/bosh-lite-settings.sh"
+    clivm.vm.provision "shell", privileged: false, path: "cloud-config/cloud-config-install.sh"
     clivm.vm.provision "shell", privileged: false, path: "concourse/concourse-install.sh"
     clivm.vm.provision "shell", privileged: true, path: "concourse/fly-install.sh"
 

@@ -22,7 +22,7 @@ fi
 $BOSH_CLI_NAME upload-stemcell $STEMCELL_URL -n
 
 # update the cloud config for vbox
-$BOSH_CLI_NAME update-cloud-config cloud_configs/vbox.yml -n
+# $BOSH_CLI_NAME update-cloud-config cloud_configs/vbox.yml -n
 
 # deploy concourse
 $BOSH_CLI_NAME deploy -d concourse concourse.yml -n \
@@ -32,11 +32,11 @@ $BOSH_CLI_NAME deploy -d concourse concourse.yml -n \
   -o operations/no-auth.yml \
   --var web_ip=$CONCOURSE_IP \
   --var external_url=http://$CONCOURSE_IP:8080 \
-  --var network_name=concourse \
-  --var web_vm_type=concourse \
-  --var db_vm_type=concourse \
-  --var db_persistent_disk_type=db \
-  --var worker_vm_type=concourse \
+  --var network_name=bosh-lite \
+  --var web_vm_type=default \
+  --var db_vm_type=default \
+  --var db_persistent_disk_type=default \
+  --var worker_vm_type=default \
   --var deployment_name=concourse
 
   popd
