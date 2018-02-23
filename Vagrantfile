@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
     clivm.vm.provision "shell", privileged: false, path: "cloud-config/cloud-config-install.sh"
     clivm.vm.provision "shell", privileged: false, path: "concourse/concourse-install.sh"
     clivm.vm.provision "shell", privileged: true, path: "concourse/fly-install.sh"
+    clivm.vm.provision "shell", privileged: false, path: "minio/minio-install.sh"
 
   end
 

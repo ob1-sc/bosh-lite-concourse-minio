@@ -1,0 +1,12 @@
+---
+- op: replace
+  path: /instance_groups/name=minio/networks/name=default
+  value:
+    name: bosh-lite
+    static_ips:
+    - 10.244.15.3
+
+- op: replace
+  path: /instance_groups/name=minio/persistent_disk_type
+  value:
+    persistent_disk_type: default
