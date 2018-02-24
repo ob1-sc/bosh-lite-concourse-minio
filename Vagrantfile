@@ -35,13 +35,13 @@ Vagrant.configure("2") do |config|
       v.cpus = 1
     end
 
-    clivm.vm.provision "shell", privileged: true, path: "misc/yaml-patch-install.sh"
-    clivm.vm.provision "shell", privileged: true, path: "bosh/bosh-cli-install.sh"
-    clivm.vm.provision "shell", privileged: false, path: "bosh/bosh-lite-settings.sh"
-    clivm.vm.provision "shell", privileged: false, path: "cloud-config/cloud-config-install.sh"
-    clivm.vm.provision "shell", privileged: false, path: "concourse/concourse-install.sh"
-    clivm.vm.provision "shell", privileged: true, path: "concourse/fly-install.sh"
-    clivm.vm.provision "shell", privileged: false, path: "minio/minio-install.sh"
+    clivm.vm.provision "shell", name: "yaml-patch-install", privileged: true, path: "misc/yaml-patch-install.sh"
+    clivm.vm.provision "shell", name: "bosh-cli-install", privileged: true, path: "bosh/bosh-cli-install.sh"
+    clivm.vm.provision "shell", name: "bosh-lite-settings", privileged: false, path: "bosh/bosh-lite-settings.sh"
+    clivm.vm.provision "shell", name: "cloud-config-install", privileged: false, path: "cloud-config/cloud-config-install.sh"
+    clivm.vm.provision "shell", name: "concourse-install", privileged: false, path: "concourse/concourse-install.sh"
+    clivm.vm.provision "shell", name: "fly-install", privileged: true, path: "concourse/fly-install.sh"
+    clivm.vm.provision "shell", name: "minio-install", privileged: false, path: "minio/minio-install.sh"
 
   end
 
