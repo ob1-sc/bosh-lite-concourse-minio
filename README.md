@@ -1,6 +1,6 @@
-# Install Concourse and Minio on Windows using bosh-cli2 and Vagrant
+# Install Concourse and Minio using bosh-cli2 and Vagrant
 
-Currently bosh-cli2 support on Windows is limited so if you are stuck with a Windows environment this Vagrant project will help you get going. Note, this approach utilises the [non-recommended Vagrant based bosh-lite](https://github.com/cloudfoundry/bosh-lite/blob/master/docs/README.md)
+Currently bosh-cli2 support on Windows is limited so if you are stuck with a Windows environment this Vagrant project will help you get going. Note, this approach utilises the [non-recommended Vagrant based bosh-lite](https://github.com/cloudfoundry/bosh-lite/blob/master/docs/README.md). You can also run this Vagrant project on other platform such as Linux without any issues if you wish.
 
 The setup consists of 2 VMs
 1. *bosh-lite*: initially a pre-defined vagrantbox, running bosh-director, configured to simulate VMs with warden-containers. After installation has been completed, this VM will also contain Concourse and Minio.  
@@ -11,10 +11,16 @@ The setup consists of 2 VMs
 * Install [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ## Instructions
-1. Run the following script to ensure you can access to Concourse and Minio from your local machine. Note, you will need to run the script as admin:
+1. Run the following script to ensure you can access to Concourse and Minio from your local machine.
+
+  Windows (run as admin):
 
    ```
    $ ./route-add.bat
+   ```
+   Linux (run as sudo):
+   ```
+   $ sudo ./route-add.sh
    ```
 
 2. Start the Vagrant project. Note, this will take a couple of minutes the first time you run it as it will need to download/install a number of components:
@@ -40,3 +46,9 @@ The setup consists of 2 VMs
    ```
    $ ./vagrant resume
    ```
+
+6. To access Concoure & Minio you can connect to the following addresses:
+
+    Concourse: http://10.244.15.2:8080/
+
+    Minio: http://10.244.15.3:9000/ (User/Pass: minio/minio123)
