@@ -24,6 +24,8 @@ vm_types:
 disk_types:
 - name: default
   disk_size: 10240
+- name: medium
+  disk_size: 51200
 
 compilation:
   az: z1
