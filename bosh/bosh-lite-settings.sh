@@ -2,6 +2,8 @@
 
 BOSH_LITE_ENV_ALIAS=vbox
 
+pushd ~/deployments
+
 # clone the bosh-lite repository
 rm -rf bosh-lite
 git clone https://github.com/cloudfoundry/bosh-lite.git
@@ -15,3 +17,5 @@ bosh -e 192.168.50.4 --ca-cert <(cat bosh-lite/ca/certs/ca.crt) alias-env $BOSH_
 
 # get the name of the bosh-lite environment alias
 echo export BOSH_ENVIRONMENT=$BOSH_LITE_ENV_ALIAS >> /home/vagrant/.profile
+
+popd

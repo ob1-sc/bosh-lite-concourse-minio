@@ -3,6 +3,8 @@
 CONCOURSE_IP=10.244.15.2
 BOSH_CLI_NAME=bosh
 
+pushd ~/deployments
+
 # clone the concourse-deployment repository
 rm -rf concourse-deployment
 git clone https://github.com/concourse/concourse-deployment.git
@@ -39,4 +41,6 @@ $BOSH_CLI_NAME deploy -d concourse concourse.yml -n \
   --var worker_vm_type=default \
   --var deployment_name=concourse
 
-  popd
+popd
+
+popd
