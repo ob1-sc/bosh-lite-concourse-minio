@@ -8,4 +8,4 @@
 
 - op: replace
   path: /instance_groups/name=minio/persistent_disk_type
-  value: minio
+  value: medium
