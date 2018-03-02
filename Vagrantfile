@@ -35,6 +35,10 @@ Vagrant.configure("2") do |config|
       v.cpus = 1
     end
 
+    # uncomment to add additional synced folder mapping
+    # clivm.vm.synced_folder "~/workspace", "/home/vagrant/workspace"
+
+    clivm.vm.provision "shell", name: "init", privileged: false, path: "misc/init.sh"
     clivm.vm.provision "shell", name: "yaml-patch-install", privileged: true, path: "misc/yaml-patch-install.sh"
     clivm.vm.provision "shell", name: "bosh-cli-install", privileged: true, path: "bosh/bosh-cli-install.sh"
     clivm.vm.provision "shell", name: "bosh-lite-settings", privileged: false, path: "bosh/bosh-lite-settings.sh"
