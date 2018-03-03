@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     bl.vm.box = 'cloudfoundry/bosh-lite'
     bl.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=777"] # ensure any VM user can create files in subfolders - eg, /vagrant/tmp
     bl.vm.provider :virtualbox do |v, override|
-      v.memory = 4096
+      v.memory = 1048
       v.cpus = 2
       override.vm.box_version = '9000.137.0' # ci:replace
       # To use a different IP address for the bosh-lite director, uncomment this line:
@@ -31,12 +31,12 @@ Vagrant.configure("2") do |config|
 
     clivm.vm.box = "ubuntu/xenial64"
     clivm.vm.provider :virtualbox do |v, override|
-      v.memory = 2048
+      v.memory = 1024
       v.cpus = 1
     end
 
     # uncomment to add additional synced folder mapping
-    # clivm.vm.synced_folder "~/workspace", "/home/vagrant/workspace"
+    clivm.vm.synced_folder "~/workspace", "/home/vagrant/workspace"
 
     clivm.vm.provision "shell", name: "init", privileged: false, path: "misc/init.sh"
     clivm.vm.provision "shell", name: "yaml-patch-install", privileged: true, path: "misc/yaml-patch-install.sh"
