@@ -12,12 +12,13 @@ git clone https://github.com/concourse/concourse-deployment.git
 pushd concourse-deployment/cluster
 
 # get the required stemcell version
-STEMCELL_VERSION=$($BOSH_CLI_NAME int concourse.yml --path /stemcells/alias=trusty/version)
-STEMCELL_URL=https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent
+# STEMCELL_VERSION=$($BOSH_CLI_NAME int concourse.yml --path /stemcells/alias=trusty/version)
+STEMCELL_VERSION="3445.2"
+STEMCELL_URL="https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent"
 
 # if the stemcell isn't latest then append version number to the URL
 if [[ $STEMCELL_VERSION != "latest" ]]; then
-  $STEMCELL_URL = $STEMCELL_URL + "?v=" + $STEMCELL_VERSION
+  STEMCELL_URL="$STEMCELL_URL?v=$STEMCELL_VERSION"
 fi
 
 # upload the stemcell
