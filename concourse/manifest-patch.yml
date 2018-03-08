@@ -1,0 +1,6 @@
+---
+# fix for https://github.com/concourse/concourse-deployment/issues/46
+- op: replace
+  path: /stemcells/alias=trusty/version
+  value:
+    3468.5
