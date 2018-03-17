@@ -36,8 +36,8 @@ Vagrant.configure("2") do |config|
     end
 
     # uncomment to add additional synced folder mapping
-    #clivm.vm.synced_folder "~/workspace", "/home/vagrant/workspace"
-    clivm.vm.synced_folder "~/Source", "/home/vagrant/workspace"
+    clivm.vm.synced_folder "~/workspace", "/home/vagrant/workspace"
+    #clivm.vm.synced_folder "~/Source", "/home/vagrant/workspace"
 
     clivm.vm.provision "shell", name: "init", privileged: false, path: "misc/init.sh"
     clivm.vm.provision "shell", name: "yaml-patch-install", privileged: true, path: "misc/yaml-patch-install.sh"
